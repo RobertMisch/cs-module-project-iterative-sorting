@@ -7,10 +7,13 @@ def selection_sort(arr):
         # TO-DO: find next smallest element
         # (hint, can do in 3 loc)
         # Your code here
-
+        for search_index in range(cur_index, len(arr)):
+            if arr[search_index] < arr[smallest_index]:
+                smallest_index = search_index
 
         # TO-DO: swap
         # Your code here
+        arr[smallest_index], arr[cur_index]= arr[cur_index], arr[smallest_index]
 
     return arr
 
@@ -18,6 +21,16 @@ def selection_sort(arr):
 # TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
     # Your code here
+    # need to check if swapped
+    swapped= True
+    while swapped:
+        swapped = False
+    #need to iterate through arr
+        for index in range(1, len(arr)):
+            #swap the higher and lower values
+            if arr[index] < arr[index-1]:
+                swapped=True
+                arr[index], arr[index-1] = arr[index-1], arr[index]
 
 
     return arr
@@ -39,8 +52,38 @@ buckets.
 
 What is the time and space complexity of the counting sort algorithm?
 '''
-def counting_sort(arr, maximum=None):
+def count_sort(arr, maximum=None):
     # Your code here
+    #we need to build an array for each number up to our maximum
+    if len(arr)==0:
+        return arr
+    if maximum==None:
+        maximum=0
+        for number in arr:
+            if number > maximum:
+                maximum=number
+    count_arr=[] 
+    sorted_arr=[]
+    for i in range(len(arr)):
+        sorted_arr.append(0)
+    for i in range(maximum+1):
+        count_arr.append(0)
+    for number in arr:
+        if number >=0:
+            count_arr[number]+=1
+        else:
+            # print("Error, negative numbers not allowed in Count Sort")
+            return "Error, negative numbers not allowed in Count Sort"
+    for index in range(1, len(count_arr)):
+        count_arr[index] = count_arr[index] + count_arr[index-1]
+    #so we need to look at our original array value
+    #we check the count_arr[og value]
+    #whatever number is stored in that index, is the correct placement of the og value
+    #then we subtract 1 from the count on the count_arr[og value]
+    #then we move to the next index in our og array
 
+    for number in arr:
+        sorted_arr[count_arr[number]-1] = number
+        count_arr[number]-=1
 
-    return arr
+    return sorted_arr
