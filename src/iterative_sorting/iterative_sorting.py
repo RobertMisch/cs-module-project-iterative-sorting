@@ -11,7 +11,6 @@ def selection_sort(arr):
             if arr[search_index] < arr[smallest_index]:
                 smallest_index = search_index
 
-
         # TO-DO: swap
         # Your code here
         arr[smallest_index], arr[cur_index]= arr[cur_index], arr[smallest_index]
@@ -22,6 +21,16 @@ def selection_sort(arr):
 # TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
     # Your code here
+    # need to check if swapped
+    swapped= True
+    while swapped:
+        swapped = False
+    #need to iterate through arr
+        for index in range(1, len(arr)):
+            #swap the higher and lower values
+            if arr[index] < arr[index-1]:
+                swapped=True
+                arr[index], arr[index-1] = arr[index-1], arr[index]
 
 
     return arr
